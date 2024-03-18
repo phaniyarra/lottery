@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lottery</title>
+<link rel="stylesheet" href="lottery.css">
+</head>
+<body>
+<div class="container">
+  <h1>Lottery Number Generator</h1>
+  <div class="input-group">
+    <label for="number1">User 1: Enter a unique number:</label><br>
+    <input type="number" id="number1" min="1" max="10">
+  </div>
+  <div class="input-group">
+    <label for="number2">User 2: Enter a unique number:</label><br>
+    <input type="number" id="number2" min="1" max="10">
+  </div>
+  <div class="input-group">
+    <label for="number3">User 3: Enter a unique number:</label><br>
+    <input type="number" id="number3" min="1" max="10">
+  </div>
+  <div class="input-group">
+    <label for="number4">User 4: Enter a unique number:</label><br>
+    <input type="number" id="number4" min="1" max="10">
+  </div>
+  <div class="numbers" id="randomNumber"></div>
+  <button onclick="generateNumber()" id="generateButton">Generate Number</button>
+</div>
+
+<script>
+function generateNumber() {
+  const inputs = [
+    parseInt(document.getElementById("number1").value),
+    parseInt(document.getElementById("number2").value),
+    parseInt(document.getElementById("number3").value),
+    parseInt(document.getElementById("number4").value)
+  ];
+  const uniqueInputs = new Set(inputs);
+  if (uniqueInputs.size !== inputs.length) {
+    alert("Please enter unique numbers for each user.");
+    return;
+  }
+  const validInputs = inputs.filter(input => !isNaN(input));
+  if (validInputs.length < 2) {
+    alert("Please enter at least two valid numbers.");
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * validInputs.length);
+  const randomNumber = validInputs[randomIndex];
+  document.getElementById("randomNumber").innerHTML = "";
+  const ball = document.createElement('div');
+  ball.classList.add('lottery-ball');
+  ball.innerText = randomNumber;
+  document.getElementById("randomNumber").appendChild(ball);
+}
+</script>
+</body>
+</html>

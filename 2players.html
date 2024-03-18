@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lottery</title>
+<link rel="stylesheet" href="lottery.css">
+</head>
+<body>
+<div class="container">
+  <h1>Lottery Number Generator</h1>
+  <div class="input-group">
+    <label for="number1">User 1: Enter a number:</label><br>
+    <input type="number" id="number1">
+  </div>
+  <div class="input-group">
+    <label for="number2">User 2: Enter a number:</label><br>
+    <input type="number" id="number2">
+  </div>
+  <div class="numbers" id="randomNumber"></div>
+  <button onclick="generateNumber()" id="generateButton">Generate Number</button>
+  
+</div>
+
+<script>
+function generateNumber() {
+  const num1 = parseInt(document.getElementById("number1").value);
+  const num2 = parseInt(document.getElementById("number2").value);
+  if (isNaN(num1) || isNaN(num2)) {
+    alert("Please enter valid numbers.");
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * 2); 
+  const randomNumber = randomIndex === 0 ? num1 : num2;
+  document.getElementById("randomNumber").innerHTML = "";
+  const ball = document.createElement('div');
+  ball.classList.add('lottery-ball');
+  ball.innerText = randomNumber;
+  document.getElementById("randomNumber").appendChild(ball);
+}
+</script>
+</body>
+</html>
